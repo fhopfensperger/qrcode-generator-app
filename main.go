@@ -27,6 +27,9 @@ func main() {
 	mux.HandleFunc("/contactCardGeneratorHandler/", contactCardGeneratorHandler)
 	mux.HandleFunc("/urlGeneratorHandler/", urlGeneratorHandler)
 
+	mux.HandleFunc("/health/live", healthHandler)
+	mux.HandleFunc("/health/ready", healthHandler)
+
 	log.Printf("Server (version: %v) started, listening on :8080", version)
 	http.ListenAndServe(":8080", mux)
 }
@@ -98,4 +101,8 @@ func urlGeneratorHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Fatal(err)
 	}
+}
+
+func healthHandler(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusOK)
 }

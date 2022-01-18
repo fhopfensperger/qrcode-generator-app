@@ -34,26 +34,8 @@ jobs:
           go build -v .
           go clean
 
-      - name: Test
-        run: go test -v ./... -covermode=count -coverprofile=coverage.out
-
-      - name: Convert coverage to lcov
-        uses: jandelgado/gcov2lcov-action@v1.0.0
-        with:
-          infile: coverage.out
-          outfile: coverage.lcov
-
-      - name: Upload coverages
-        uses: coverallsapp/github-action@v1.0.1
-        with:
-          github-token: ${{ secrets.github_token }}
-          path-to-lcov: coverage.lcov
-
       - name: Trigger Go Report Card
         run: curl -d "repo=github.com/fhopfensperger/qrcode-generator-app" https://goreportcard.com/checks
-
-      - name: Clean directory
-        run: rm coverage.lcov
 
       - name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v2
