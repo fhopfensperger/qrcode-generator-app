@@ -1,0 +1,31 @@
+before:
+  hooks:
+    - go mod tidy
+builds:
+  - env:
+      - CGO_ENABLED=0
+    # GOOS list to build for.
+    # For more info refer to: https://golang.org/doc/install/source#environment
+    # Defaults are darwin and linux.
+    goos:
+      - linux
+      - darwin
+      - windows
+
+    # GOARCH to build for.
+    # For more info refer to: https://golang.org/doc/install/source#environment
+    # Defaults are 386 and amd64.
+    goarch:
+      - amd64
+      - arm
+      - arm64
+
+archives:
+  - name_template: '{{ .ProjectName }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}'
+    format_overrides:
+      - goos: windows
+        format: zip
+    files:
+      - README.md
+      - LICENSE
+      - completions/*

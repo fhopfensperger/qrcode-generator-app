@@ -1,0 +1,133 @@
+<html lang="en">
+<head>
+    <title>{{.Title}}</title>
+    <style>
+        * {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        label {
+            font-size: medium;
+        }
+        input {
+            font-size: large;
+            background: #EEE;
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            box-sizing: border-box;
+        }
+        input[type="radio"] { display: none; }
+        input + label { display: inline-block }
+
+        input ~ .tab { display: none }
+        #tab1:checked ~ .tab.content1,
+        #tab2:checked ~ .tab.content2 { display: block; }
+
+        input + label {
+            border: 1px solid #999;
+            background: #EEE;
+            padding: 4px 12px;
+            border-radius: 4px 4px 0 0;
+            position: relative;
+            top: 1px;
+        }
+        input:checked + label {
+            background: #FFF;
+            border-bottom: 1px solid transparent;
+        }
+        input ~ .tab {
+            border-top: 1px solid #999;
+            padding: 12px;
+        }
+    </style>
+</head>
+<body>
+<h1>{{.Title}}</h1>
+<h3>Please select `vCard` for a contact card QR-Code or `URL` for a http link QR-Code</h3>
+<input type="radio" name="tabs" id="tab1" checked />
+<label for="tab1">vCard</label>
+
+<input type="radio" name="tabs" id="tab2" />
+<label for="tab2">URL</label>
+
+
+<div class="tab content1">Please enter your contact information if you would like to generate a QRCode.
+<br>
+<br>
+
+<form action="contactCardGeneratorHandler/" method=post>
+
+    <label for="firstname">Firstname: </label><br>
+    <label>
+        <input type="text" name="firstname" value="Florian">
+    </label><br>
+
+    <label for="lastname">Lastname: </label><br>
+    <label>
+        <input type="text" name="lastname" value="Hopfensperger">
+    </label><br>
+
+    <label for="organization">Organization/Company: </label><br>
+    <label>
+        <input type="text" name="organization" value="Allianz Technology">
+    </label><br>
+
+
+    <label for="title">Title: </label><br>
+    <label>
+        <input type="text" name="title" value="Team Lead Cloud Engineering">
+    </label><br>
+
+    <label for="email">Email: </label><br>
+    <label>
+        <input type="email" name="email" value="florian.hopfensperger@allianz.de">
+    </label><br>
+
+    <label for="phone">Phone number: </label><br>
+    <label>
+        <input type="text" name="phone" value="+4915142024908">
+    </label><br>
+
+
+    <label for="street">Street: </label><br>
+    <label>
+        <input type="text" name="street" value="Dieselstr. 8">
+    </label><br>
+
+    <label for="postcode">Postcode: </label><br>
+    <label>
+        <input type="text" name="postcode" value="85774">
+    </label><br>
+
+    <label for="locality">City: </label><br>
+    <label>
+        <input type="text" name="locality" value="Unterföhring">
+    </label><br>
+    <br>
+    <input type="submit" value="Generate">
+</form>
+</div>
+
+<div class="tab content2">Please enter a URL to be encoded into a QR code.
+    <br>
+    <br>
+
+<form action="urlGeneratorHandler/" method=post>
+
+    <label for="url">URL: (dont forget https:// or http://)</label><br>
+    <label>
+        <input type="url" name="url" value="https://fhopfensperger.github.io">
+    </label><br>
+
+
+    <br>
+    <input type="submit" value="Generate">
+</form>
+</div>
+<footer>
+    <p>Author: Florian Hopfensperger<br>
+        <a href="mailto:f.hopfensperger@gmail.com">f.hopfensperger@gmail.com</a> <a href="https://fhopfensperger.github.io">fhopfensperger.github.io</a></p>
+    Version: {{.Version}}
+</footer>
+</body>
+</html>
