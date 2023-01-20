@@ -7,6 +7,12 @@
 
 A simple web app to generate QR-Codes for vCards or URLs
 
-## Demo
+## Run it
 
-[qrcode.hopfi.selfhost.co](https://qrcode.hopfi.selfhost.co)
+1. Start the container
+  ```bash
+  docker run -p 8080:8080 --rm quay.io/fhopfensperger/qrcode-generator-app
+  ```
+
+2. Open Web browser [localhost:8080](http://localhost:8080)
+
